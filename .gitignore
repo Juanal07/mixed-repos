@@ -1,5 +1,9 @@
 manos-poker/venv
 manos-poker/.idea
+
+taxi/venv
+taxi/.idea
+
 backend_node_expres/node_modules
 backend_node_expres/.idea
 
