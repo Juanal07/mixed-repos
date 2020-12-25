@@ -49,7 +49,7 @@ class Blockchain:
         if not Blockchain.is_valid_proof(block, proof):
             return False
 
-        block.hash = proof
+        block.compute_hash = proof
         self.chain.append(block)
         return True
 
@@ -62,7 +62,7 @@ class Blockchain:
         return (block_hash.startswith('0' * Blockchain.difficulty) and
                 block_hash == block.compute_hash())
 
-    @staticmethod
+    # @staticmethod
     def proof_of_work(self, block):
         """
         Function that tries different values of the nonce to get a hash
@@ -94,6 +94,8 @@ class Blockchain:
                           transactions=self.unconfirmed_transactions,
                           timestamp=time.time(),
                           previous_hash=last_block.hash)
+
+        # print(new_block)
 
         proof = self.proof_of_work(new_block)
         self.add_block(new_block, proof)
