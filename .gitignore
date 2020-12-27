@@ -4,8 +4,9 @@ manos-poker/.idea
 taxi/venv
 taxi/.idea
 
-blockchain-intro/venv
-blockchain-intro/.idea
+blockchain-play/venv
+blockchain-play/.idea
+blockchain-play/__pycache__
 
 backend_node_expres/node_modules
 backend_node_expres/.idea
