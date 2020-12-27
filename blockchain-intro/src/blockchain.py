@@ -1,11 +1,13 @@
 import time
 
 from block import Block
+from transaction import Transaction
 
 
 class Blockchain:
     # difficulty of PoW algorithm
-    difficulty = 2
+    difficulty = 1
+    reward = 50
 
     def __init__(self):
         """
@@ -25,13 +27,9 @@ class Blockchain:
         genesis_block.hash = genesis_block.compute_hash()
         self.chain.append(genesis_block)
 
-    @property
-    def last_block(self):
-        """
-        A quick pythonic way to retrieve the most recent block in the chain. Note that
-        the chain will always consist of at least one block (i.e., genesis block)
-        """
-        return self.chain[-1]
+    def add_new_transaction(self, transaction):
+        if transaction.validate():
+            self.unconfirmed_transactions.append(transaction)
 
     def add_block(self, block, proof):
         """
@@ -62,8 +60,8 @@ class Blockchain:
         return (block_hash.startswith('0' * Blockchain.difficulty) and
                 block_hash == block.compute_hash())
 
-    # @staticmethod
-    def proof_of_work(self, block):
+    @staticmethod
+    def proof_of_work(block):
         """
         Function that tries different values of the nonce to get a hash
         that satisfies our difficulty criteria.
@@ -73,11 +71,7 @@ class Blockchain:
         while not computed_hash.startswith('0' * Blockchain.difficulty):
             block.nonce += 1
             computed_hash = block.compute_hash()
-
         return computed_hash
-
-    def add_new_transaction(self, transaction):
-        self.unconfirmed_transactions.append(transaction)
 
     def mine(self):
         """
@@ -90,14 +84,32 @@ class Blockchain:
 
         last_block = self.last_block
 
+        trs = self.unconfirmed_transactions
+        miner_reward = Transaction('COINBASE', 'Minero', Blockchain.reward)
+        trs.append(miner_reward)
+
         new_block = Block(index=last_block.index + 1,
-                          transactions=self.unconfirmed_transactions,
+                          transactions=trs,
                           timestamp=time.time(),
                           previous_hash=last_block.hash)
-
-        # print(new_block)
 
         proof = self.proof_of_work(new_block)
         self.add_block(new_block, proof)
         self.unconfirmed_transactions = []
         return new_block.index
+
+    @property
+    def last_block(self):
+        return self.chain[-1]
+
+    @property
+    def last_transaction(self):
+        return self.unconfirmed_transactions[-1]
+
+    @property
+    def pending_transactions(self):
+        return self.unconfirmed_transactions
+
+    @property
+    def full_chain(self):
+        return self.chain

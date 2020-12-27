@@ -25,7 +25,7 @@ class Block:
         toString method of the object Block
         """
         return 'Index: ' + str(self.index) + '\n' \
-               + 'Transactions: ' + ''.join(str(e) for e in self.transactions) + '\n' \
+               + 'Transactions: ' + '\n'.join(str(e) for e in self.transactions) + '\n' \
                + 'Time: ' + time.ctime(self.timestamp) + '\n' \
                + 'Previous_hash: ' + str(self.previous_hash) + '\n' \
                + 'Nonce: ' + str(self.nonce) + '\n' \
