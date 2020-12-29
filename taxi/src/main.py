@@ -1,11 +1,15 @@
 import gym
 
 env = gym.make("Taxi-v3").env
-state = env.reset()
-env.render()
-env.close()
 
 print("Action Space {}".format(env.action_space))
 print("State Space {}".format(env.observation_space))
 
-print('\x1b[31mRED' + '\x1b[33mYELLOW' +  '\x1b[32mGREEN' + '\x1b[35mPINK' + '\x1b[0m' + '\n')
+state = env.encode(3, 1, 2, 0)  # (taxi row, taxi column, passenger index, destination index)
+print("State:", state)
+
+env.s = state
+env.render()
+
+env.P[328]
+
