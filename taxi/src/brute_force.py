@@ -35,15 +35,15 @@ print("Timesteps taken: {}".format(epochs))
 print("Penalties incurred: {}".format(penalties))
 
 
-# def print_frames(framess):
-#     for i, frame in enumerate(framess):
-#         clear_output(wait=True)
-#         print(frame['frame'].getvalue())
-#         print(f"Timestep: {i + 1}")
-#         print(f"State: {frame['state']}")
-#         print(f"Action: {frame['action']}")
-#         print(f"Reward: {frame['reward']}")
-#         sleep(.1)
-#
-#
-# print_frames(frames)
+def print_frames(frames):
+    for i, frame in enumerate(frames):
+        clear_output(wait=True)
+        print(frame['frame'])
+        print(f"Timestep: {i + 1}")
+        print(f"State: {frame['state']}")
+        print(f"Action: {frame['action']}")
+        print(f"Reward: {frame['reward']}")
+        sleep(.1)
+
+
+print_frames(frames)
