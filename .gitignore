@@ -11,4 +11,9 @@ blockchain-play/src/__pycache__
 backend_node_expres/node_modules
 backend_node_expres/.idea
 
+flask-learn/venv
 flask-learn/.idea
+
+python-web-scraping/venv
+python-web-scraping/.idea
+python-web-scraping/dataset
